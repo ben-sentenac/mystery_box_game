@@ -1,0 +1,23 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the root package.json and yarn.lock
+COPY ../../package.json ../../yarn.lock ./
+
+# Install dependencies for the entire monorepo
+RUN yarn install
+
+# Copy the frontend-specific files
+COPY . .
+
+# Build the frontend
+RUN yarn workspace frontend run build
+
+# Expose the frontend port
+EXPOSE 3000
+
+# Run the frontend
+CMD ["yarn", "workspace", "frontend", "start"]

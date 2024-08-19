@@ -1,0 +1,14 @@
+{
+  "name": "mystery_box_game",
+  "version": "1.0.0",
+  "description": "[introduction](#introduction) [features](#features) [tech-stack](#tech-stack) [project-structure](#project-structure) [installation](#installation) [usage](#usage) [Api-doc](#api-documentation) [liscence](#license) [contact](#contact)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

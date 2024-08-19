@@ -1,0 +1,6 @@
+CREATE TABLE user_boxes (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    box_id INT REFERENCES boxes(id) ON DELETE CASCADE,
+    opened_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
