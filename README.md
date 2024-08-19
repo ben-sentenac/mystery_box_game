@@ -11,7 +11,7 @@
 [contact](#contact)
 
 ## Introduction
-- Mystery Box Game is a web-based game where players can purchase and open mystery boxes to collect virtual items of varying rarities. The game includes features like user authentication, a ranking system, real-time notifications, and more. The goal is to create an engaging, fun experience that showcases your skills in Node.js, Express, MongoDB, and frontend development.
+- Mystery Box Game is a web-based game where players can purchase and open mystery boxes to collect virtual items of varying rarities. The game includes features like user authentication, a ranking system, real-time notifications, and more. The goal is to create an engaging, fun experience in nodejs development.
 
 ## Features
 - User Authentication: Secure user registration and login with JWT.
@@ -156,6 +156,9 @@ mystery-box-game/
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
+> [!WARNING] 
+> in progress 
+> this project is for educationnal purpose.
 ## Contact
 For any questions or suggestions, feel free to contact me:
 Email: bsr-web-09@proton.me
