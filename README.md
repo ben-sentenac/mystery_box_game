@@ -157,7 +157,7 @@ mystery-box-game/
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 > [!WARNING] 
-> in progress 
+> work in progress 
 > this project is for educationnal purpose.
 ## Contact
 For any questions or suggestions, feel free to contact me:
