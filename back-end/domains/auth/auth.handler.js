@@ -4,7 +4,6 @@ import { hash, compare } from 'bcrypt';
 ;
 ;
 ;
-;
 /**
  *
  * @param dbConnection
@@ -65,11 +64,12 @@ export const loginHandler = async function (req, res) {
         db = await this.mysql.getConnection();
         const [user] = await findByEmail(email, db);
         if (!user) {
-            return res.status(404).send({ status: 'ERROR', message: 'Wrong credentials' });
+            //rerdirect login
+            return res.redirect('/auth/login', 303);
         }
         const veryfied = await compare(password, user.password_hash);
         if (!veryfied) {
-            return res.status(404).send({ status: 'ERROR', message: 'Wrong credentials' });
+            return res.status(404).send({ status: 'ERROR', message: 'Email or password are incorrect' });
         }
         const token = this.jwt.sign({ email: user.email });
         const loginPayload = {

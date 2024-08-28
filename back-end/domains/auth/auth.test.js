@@ -81,7 +81,7 @@ test('auth test suite', async (t) => {
                 }
             });
             strictEqual(response.statusCode, 404);
-            deepStrictEqual(response.json(), { status: 'ERROR', message: 'Wrong credentials' });
+            deepStrictEqual(response.json(), { status: 'ERROR', message: 'Email or password are incorrect' });
         });
         await t.test('login should fail if wrong email ', async (t) => {
             const response = await app.inject({
@@ -92,8 +92,7 @@ test('auth test suite', async (t) => {
                     password: '21582123585'
                 }
             });
-            strictEqual(response.statusCode, 404);
-            deepStrictEqual(response.json(), { status: 'ERROR', message: 'Wrong credentials' });
+            strictEqual(response.statusCode, 303);
         });
     });
 });

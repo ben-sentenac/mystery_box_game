@@ -1,12 +1,6 @@
-import { FastifyReply, FastifyRequest, RawServerBase } from 'fastify';
+import { FastifyReply, FastifyRequest} from 'fastify';
 import { hash,compare } from 'bcrypt';
-import { PoolConnection } from "mysql2/promise";
-import { MySQLPromisePool } from '@fastify/mysql';
-
-interface IResponse {
-    status:'OK' | 'ERROR'
-};
-
+import { IResponse, ErrorResponsePayload } from '../../types/server.types.js';
 interface User {
     id:number,
     email:string,
@@ -23,9 +17,7 @@ interface LoginRequestBody {
     password:string
 };
 
-interface ErrorResponsePayload extends IResponse {
-    message:string
-}
+
 
 interface RegisterResponsePayload extends IResponse {
     data:User
@@ -107,11 +99,12 @@ export const loginHandler = async function (req:FastifyRequest<{Body:LoginReques
         db = await this.mysql.getConnection();  
         const [user] = await findByEmail(email,db);
         if(!user) {
-            return res.status(404).send({status:'ERROR',message:'Wrong credentials'});
+            //rerdirect login
+           return res.redirect('/auth/login',303);
         }
         const  veryfied = await compare(password,user.password_hash);
         if(!veryfied) {
-            return res.status(404).send({status:'ERROR',message:'Wrong credentials'});
+            return res.status(404).send({status:'ERROR',message:'Email or password are incorrect'});
         }
         const token = this.jwt.sign({email:user.email});
         const loginPayload:LoginResponsePayload = {

@@ -54,6 +54,13 @@ export async function buildServer() {
             });
         }
     });
+    server.setNotFoundHandler((req, res) => {
+        const notfoundPayload = {
+            status: 'NOT FOUND',
+            message: 'Resource not found'
+        };
+        return res.status(404).send(notfoundPayload);
+    });
     return server;
 }
 //# sourceMappingURL=server.js.map
