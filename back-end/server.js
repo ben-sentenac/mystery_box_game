@@ -17,6 +17,12 @@ const envSchema = {
         JWT_SECRET: {
             type: 'string',
             default: 'your_secret_phrase'
+        },
+        GOOGLE_CLIENT_ID: {
+            type: 'string'
+        },
+        GOOGLE_CLIENT_SECRET: {
+            type: 'string'
         }
     }
 };
@@ -43,6 +49,8 @@ export async function buildServer() {
     server.register(fastifyJwt, {
         secret: 'your_secret_phrase',
     });
+    //oauth plugin 
+    //TODO
     //ADD API ROUTES
     server.register(AuthRoutes, { prefix: '/api/auth' });
     //ERRORS

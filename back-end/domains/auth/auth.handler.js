@@ -4,6 +4,7 @@ import { hash, compare } from 'bcrypt';
 ;
 ;
 ;
+;
 /**
  *
  * @param dbConnection
@@ -23,8 +24,8 @@ async function findByEmail(email, dbConnection) {
     console.log('findByEmail', user);
     return user;
 }
-async function find(field, dbConnection) {
-    const [user] = await dbConnection.query(`SELECT * FROM users WHERE ${field} = ?`);
+async function find(field, value, dbConnection) {
+    const [user] = await dbConnection.query(`SELECT * FROM users WHERE ${field} = ?`, [value]);
     return user;
 }
 export async function authenticate() {
@@ -84,6 +85,23 @@ export const loginHandler = async function (req, res) {
     }
     finally {
         db.release();
+    }
+};
+export const getProfileHandler = async function (req, res) {
+    const id = req.params?.id;
+    let db;
+    try {
+        db = await this.mysql.getConnection();
+        const [user] = await find('id', id, db);
+        return {
+            status: 'OK',
+            data: user
+        };
+    }
+    catch (error) {
+        //
+        console.error(error);
+        throw error;
     }
 };
 //# sourceMappingURL=auth.handler.js.map

@@ -27,6 +27,10 @@ interface LoginResponsePayload extends IResponse {
     token:string
 };
 
+interface ProfileParams  {
+    id:string
+};
+
 /**
  * 
  * @param dbConnection 
@@ -48,8 +52,8 @@ async function findByEmail(email:string,dbConnection) {
         return user;
 }
 
-async function find(field:string,dbConnection) {
-    const [user] = await dbConnection.query(`SELECT * FROM users WHERE ${field} = ?`);
+async function find(field:string,value,dbConnection) {
+    const [user] = await dbConnection.query(`SELECT * FROM users WHERE ${field} = ?`,[value]);
     return user;
 }
 
@@ -117,5 +121,23 @@ export const loginHandler = async function (req:FastifyRequest<{Body:LoginReques
         throw error;
     } finally {
         db.release();
+    }
+}
+
+
+export const getProfileHandler = async function(req:FastifyRequest<{Params:ProfileParams}>,res:FastifyReply) {
+    const id = req.params?.id;
+    let db;
+    try {
+        db = await this.mysql.getConnection();
+        const [user] = await find('id',id,db);
+        return {
+            status:'OK',
+            data:user
+        }
+    } catch (error) {
+        //
+        console.error(error);
+        throw error;
     }
 }

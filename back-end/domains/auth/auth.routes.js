@@ -1,4 +1,4 @@
-import { loginHandler, registerHandler } from "./auth.handler.js";
+import { loginHandler, registerHandler, getProfileHandler } from "./auth.handler.js";
 const registerOpts = {
     schema: {
         body: {
@@ -54,8 +54,39 @@ const loginOpts = {
         }
     }
 };
+const showProfileOptions = {
+    schema: {
+        response: {
+            "200": {
+                type: 'object',
+                properties: {
+                    status: {
+                        type: 'string',
+                    },
+                    data: {
+                        type: 'object',
+                        properties: {
+                            id: {
+                                type: 'string'
+                            }, username: {
+                                type: 'string'
+                            },
+                            email: {
+                                type: 'string'
+                            },
+                            points: {
+                                type: 'number'
+                            }
+                        },
+                    },
+                }
+            }
+        }
+    }
+};
 export async function AuthRoutes(_instance) {
     _instance.post('/register', registerOpts, registerHandler);
     _instance.post('/login', loginOpts, loginHandler);
+    _instance.get('/:id', showProfileOptions, getProfileHandler);
 }
 //# sourceMappingURL=auth.routes.js.map

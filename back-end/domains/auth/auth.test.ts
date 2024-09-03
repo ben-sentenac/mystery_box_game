@@ -110,4 +110,16 @@ test('auth test suite', async (t) => {
             strictEqual(response.statusCode,303);
         });
     });
+
+    await t.test('GET /auth/:id', async (t) => {
+        await t.test('should show user profile', async(t) => {
+            const response = await app.inject({
+                url:'/api/auth/1',
+                method:'GET',
+            });
+            console.log(response.json());
+            strictEqual(response.statusCode,200);
+            strictEqual(response.json().data.id,'1');
+        });
+    })
 });
