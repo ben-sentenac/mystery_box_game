@@ -1,10 +1,4 @@
 import { hash, compare } from 'bcrypt';
-;
-;
-;
-;
-;
-;
 /**
  *
  * @param dbConnection

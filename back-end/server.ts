@@ -1,7 +1,7 @@
 import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { AuthRoutes } from './domains/auth/auth.routes.js';
 import fastifyJwt from '@fastify/jwt'
-import fastifyMysql, { MySQLPromisePool } from '@fastify/mysql';
+import fastifyMysql from '@fastify/mysql';
 import fastifyEnv from '@fastify/env';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,19 +10,7 @@ import { NotFoundResponsePayload } from './types/server.types.js';
 const _filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(_filename);
 
-declare module 'fastify' {
-    interface FastifyInstance {
-        mysql: MySQLPromisePool,
-        config: Config,
-    }
-}
 
-type Config = {
-    MYSQL_CONNECTION_STRING?: string,
-    JWT_SECRET?: string,
-    GOOGLE_CLIENT_ID:string,
-    GOOGLE_CLIENT_SECRET:string
-};
 const envSchema = {
     type: 'object',
     required: ['MYSQL_CONNECTION_STRING', 'JWT_SECRET'],

@@ -1,36 +1,7 @@
 import { FastifyReply, FastifyRequest} from 'fastify';
 import { hash,compare } from 'bcrypt';
-import { IResponse, ErrorResponsePayload } from '../../types/server.types.js';
-interface User {
-    id:number,
-    email:string,
-    username:string
-};
-interface RegisterRequestBody {
-    username: string,
-    email: string,
-    password: string
-};
-
-interface LoginRequestBody {
-    email:string,
-    password:string
-};
-
-
-
-interface RegisterResponsePayload extends IResponse {
-    data:User
-};
-
-interface LoginResponsePayload extends IResponse {
-    token:string
-};
-
-interface ProfileParams  {
-    id:string
-};
-
+import {  ErrorResponsePayload } from '../../types/server.types.js';
+import { RegisterRequestBody,RegisterResponsePayload,LoginRequestBody,LoginResponsePayload,ProfileParams } from './types/auth.types.js';
 /**
  * 
  * @param dbConnection 
